@@ -7,3 +7,4 @@
 - Next.js 14/React 18
 - TypeScript 5
 - Tailwind 3
+- Shadcn/ui

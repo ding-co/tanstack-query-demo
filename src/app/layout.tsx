@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import { ReactNode } from 'react';
+import { cn } from '@/lib/utils';
 import './globals.css';
 
-const notoSansKR = Noto_Sans_KR({ subsets: ['latin'] });
+const notoSansKR = Noto_Sans_KR({
+  subsets: ['latin'],
+  variable: '--noto-sans-kr',
+});
 
 export const metadata: Metadata = {
   title: 'Tanstack-query Demo App',
@@ -17,7 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={notoSansKR.className}>{children}</body>
+      <body
+        className={cn(
+          'min-h-screen bg-background font-sans antialiased',
+          notoSansKR.variable
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }
