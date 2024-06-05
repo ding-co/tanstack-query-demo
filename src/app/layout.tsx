@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import Providers from './providers';
 import './globals.css';
 
 const notoSansKR = Noto_Sans_KR({
@@ -27,7 +28,7 @@ export default function RootLayout({
           notoSansKR.variable
         )}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
