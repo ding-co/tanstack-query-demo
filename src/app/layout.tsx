@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="ko">
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased',
+          'max-w-[30rem] my-0 mx-auto min-h-screen bg-background font-sans antialiased',
           notoSansKR.variable
         )}
       >
