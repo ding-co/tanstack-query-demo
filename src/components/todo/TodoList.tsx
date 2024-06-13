@@ -1,4 +1,5 @@
-import type { Dispatch, SetStateAction } from 'react';
+'use client';
+
 import type { Todo } from '@prisma/client';
 import { Checkbox } from '../ui/checkbox';
 import { Trash2Icon } from 'lucide-react';
@@ -6,20 +7,28 @@ import clsx from 'clsx';
 
 interface Props {
   todos: Todo[];
-  setTodos: Dispatch<SetStateAction<Todo[]>>;
 }
 
-export default function TodoList({ todos, setTodos }: Props) {
-  const handleToggle = (id: string) => () => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
-      )
-    );
+export default function TodoList({ todos }: Props) {
+  const handleToggle = (id: number) => async () => {
+    await fetch(`/api/todos/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   };
 
-  const deleteTodo = (id: string) => () => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  const deleteTodo = (id: number) => async () => {
+    await fetch(`/api/todos/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    });
   };
 
   return (
@@ -27,12 +36,12 @@ export default function TodoList({ todos, setTodos }: Props) {
       {todos.map((todo) => (
         <li key={todo.id} className="flex items-center gap-2">
           <Checkbox
-            id={todo.id}
+            id={todo.id.toString()}
             checked={todo.isDone}
             onCheckedChange={handleToggle(todo.id)}
           />
           <label
-            htmlFor={todo.id}
+            htmlFor={todo.id.toString()}
             className={clsx('text-base font-medium leading-none', {
               'line-through text-gray-400': todo.isDone,
               'text-black': !todo.isDone,

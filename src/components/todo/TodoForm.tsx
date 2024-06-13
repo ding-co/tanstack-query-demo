@@ -1,19 +1,10 @@
-import {
-  type Dispatch,
-  type FormEvent,
-  type SetStateAction,
-  useRef,
-} from 'react';
-import type { Todo } from '@prisma/client';
+'use client';
+
+import { type FormEvent, useRef } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
-interface Props {
-  todos: Todo[];
-  setTodos: Dispatch<SetStateAction<Todo[]>>;
-}
-
-export default function TodoForm({ todos, setTodos }: Props) {
+export default function TodoForm() {
   const todoRef = useRef<HTMLInputElement | null>(null);
 
   const addTodo = async (event: FormEvent<HTMLFormElement>) => {
@@ -23,15 +14,15 @@ export default function TodoForm({ todos, setTodos }: Props) {
       return;
     }
 
-    const newTodo = {
-      id: (todos.length + 1).toString(),
-      title: todoRef.current.value,
-      isDone: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    setTodos([...todos, newTodo]);
+    await fetch(`/api/todos`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: todoRef.current.value,
+      }),
+    });
 
     todoRef.current.value = '';
   };

@@ -1,17 +1,14 @@
-'use client';
-
-import { useState } from 'react';
-import type { Todo } from '@prisma/client';
 import TodoForm from '@/components/todo/TodoForm';
 import TodoList from '@/components/todo/TodoList';
+import prisma from '../../../db';
 
-export default function TodosPage() {
-  const [todos, setTodos] = useState<Todo[]>([]);
+export default async function TodosPage() {
+  const todos = await prisma.todo.findMany();
 
   return (
     <main className="mt-6 flex-1 flex flex-col items-center gap-6">
-      <TodoForm todos={todos} setTodos={setTodos} />
-      <TodoList todos={todos} setTodos={setTodos} />
+      <TodoForm />
+      <TodoList todos={todos} />
     </main>
   );
 }
