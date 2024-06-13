@@ -17,6 +17,21 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        'macaroni-and-cheese': {
+          '50': '#fff6ed',
+          '100': '#ffecd5',
+          '200': '#ffd4a9',
+          '300': '#febd81',
+          '400': '#fc8c3b',
+          '500': '#fa6c15',
+          '600': '#eb510b',
+          '700': '#c33b0b',
+          '800': '#9b3011',
+          '900': '#7d2a11',
+          '950': '#431207',
+        },
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },
