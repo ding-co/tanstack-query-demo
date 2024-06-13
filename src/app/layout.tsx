@@ -1,6 +1,6 @@
+import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
-import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 import Providers from './providers';
 import './globals.css';
@@ -11,8 +11,8 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: 'Tanstack-query Demo App',
-  description: 'TO DO List App with Tanstack-query',
+  title: 'Tanstack Query Demo App',
+  description: 'TO-DO List Demo App with Tanstack Query',
 };
 
 export default function RootLayout({
