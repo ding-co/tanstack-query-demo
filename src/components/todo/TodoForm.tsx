@@ -28,10 +28,7 @@ export default function TodoForm() {
   };
 
   return (
-    <form
-      onSubmit={addTodo}
-      className="w-3/4 flex justify-center items-end gap-2"
-    >
+    <form onSubmit={addTodo} className="w-3/4 flex items-center gap-2">
       <Input
         ref={todoRef}
         type="text"

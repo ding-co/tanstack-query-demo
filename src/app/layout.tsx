@@ -24,12 +24,14 @@ export default function RootLayout({
     <html lang="ko">
       <body
         className={cn(
-          'max-w-[30rem] my-0 mx-auto min-h-screen bg-background font-sans antialiased',
+          'w-full min-h-screen font-sans antialiased leading-none disable-blur overflow-x-clip bg-sisal-300',
           notoSansKR.variable
         )}
         suppressHydrationWarning={true}
       >
-        <Providers>{children}</Providers>
+        <div className="container flex flex-col py-8 px-6 my-0 mx-auto">
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );

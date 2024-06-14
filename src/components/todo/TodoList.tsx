@@ -34,7 +34,10 @@ export default function TodoList({ todos }: Props) {
   return (
     <ul className="w-3/4 flex flex-col gap-3">
       {todos.map((todo) => (
-        <li key={todo.id} className="flex items-center gap-2">
+        <li
+          key={todo.id}
+          className="flex items-center gap-2 bg-white bg-opacity-95 leading-5 p-4 border border-solid border-kabul-700 rounded-2xl"
+        >
           <Checkbox
             id={todo.id.toString()}
             checked={todo.isDone}
