@@ -1,3 +1,13 @@
+export const getTodos = async () => {
+  const response = await fetch(`/api/todos`);
+
+  if (!response.ok) {
+    throw new Error('Failed to get todos.');
+  }
+
+  return response.json();
+};
+
 export const postTodo = async (title: string) => {
   const response = await fetch(`/api/todos`, {
     method: 'POST',
@@ -10,7 +20,7 @@ export const postTodo = async (title: string) => {
   });
 
   if (!response.ok) {
-    throw new Error('Failed to add todo.');
+    throw new Error('Failed to post todo.');
   }
 };
 
