@@ -1,6 +1,24 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "plugin:@tanstack/eslint-plugin-query/recommended"
-  ]
+    "plugin:@tanstack/eslint-plugin-query/recommended",
+    "airbnb",
+    "airbnb-typescript",
+    "prettier"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "radix": ["error", "as-needed"],
+    "arrow-body-style": "off",
+    "react/jsx-boolean-value": "warn",
+    "react/require-default-props": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "import/prefer-default-export": "off",
+    "no-promise-executor-return": "off",
+    "no-undef-init": "off"
+  }
 }
