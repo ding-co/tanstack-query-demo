@@ -35,7 +35,6 @@ export default function TodoForm() {
         type="text"
         placeholder="Add Your Todo."
         autoFocus
-        maxLength={15}
         required
       />
       <Button type="submit">추가</Button>

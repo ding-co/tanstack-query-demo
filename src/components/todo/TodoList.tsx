@@ -53,10 +53,12 @@ export default function TodoList({ todos }: Props) {
           >
             {todo.title}
           </label>
-          <Trash2Icon
-            className="h-5 w-5 cursor-pointer"
-            onClick={deleteTodo(todo.id)}
-          />
+          <div>
+            <Trash2Icon
+              className="h-5 w-5 cursor-pointer"
+              onClick={deleteTodo(todo.id)}
+            />
+          </div>
         </li>
       ))}
     </ul>
