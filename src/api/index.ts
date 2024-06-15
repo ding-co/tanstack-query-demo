@@ -1,6 +1,11 @@
 import { Todo } from '@prisma/client';
 
+import { sleep } from '@/lib/\btime';
+
 export const getTodos = async (): Promise<Todo[]> => {
+  // FIXME: This is a hack to simulate a slow network.
+  await sleep(750);
+
   const response = await fetch(`/api/todos`);
 
   if (!response.ok) {
@@ -27,6 +32,9 @@ export const postTodo = async (title: string): Promise<void> => {
 };
 
 export const patchTodo = async (id: number): Promise<void> => {
+  // FIXME: This is a hack to simulate a slow network.
+  await sleep(750);
+
   const response = await fetch(`/api/todos/${id}`, {
     method: 'PATCH',
     headers: {
