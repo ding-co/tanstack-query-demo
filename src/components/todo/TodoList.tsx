@@ -10,6 +10,7 @@ interface Props {
   handleToggleTodo: (id: number) => () => Promise<void>;
   onDeleteTodo: (id: number) => () => Promise<void>;
   isLoading: boolean;
+  error: unknown;
 }
 
 export default function TodoList({
@@ -17,6 +18,7 @@ export default function TodoList({
   handleToggleTodo,
   onDeleteTodo,
   isLoading,
+  error,
 }: Props) {
   if (isLoading) {
     return (
@@ -24,6 +26,10 @@ export default function TodoList({
         <ClipLoader loading={isLoading} color="#1b62da" size="50px" />
       </div>
     );
+  }
+
+  if (error) {
+    return <p className="font-bold text-red-600">{error.toString()}</p>;
   }
 
   return (

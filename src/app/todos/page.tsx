@@ -10,28 +10,45 @@ import TodoList from '@/components/todo/TodoList';
 export default function TodosPage() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<unknown>(null);
 
   const fetchTodos = async () => {
     setIsLoading(true);
 
-    const todos = await getTodos();
-    setTodos(todos);
+    try {
+      const todos = await getTodos();
+      setTodos(todos);
+    } catch (error) {
+      setError(error);
+    }
 
     setIsLoading(false);
   };
 
   const addTodo = async (title: string) => {
-    await postTodo(title);
+    try {
+      await postTodo(title);
+    } catch (error) {
+      setError(error);
+    }
     fetchTodos();
   };
 
   const handleToggleTodo = (id: number) => async () => {
-    await patchTodo(id);
+    try {
+      await patchTodo(id);
+    } catch (error) {
+      setError(error);
+    }
     fetchTodos();
   };
 
   const onDeleteTodo = (id: number) => async () => {
-    await deleteTodo(id);
+    try {
+      await deleteTodo(id);
+    } catch (error) {
+      setError(error);
+    }
     fetchTodos();
   };
 
@@ -47,6 +64,7 @@ export default function TodosPage() {
         handleToggleTodo={handleToggleTodo}
         onDeleteTodo={onDeleteTodo}
         isLoading={isLoading}
+        error={error}
       />
     </main>
   );
