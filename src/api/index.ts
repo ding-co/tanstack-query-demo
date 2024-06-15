@@ -1,4 +1,6 @@
-export const getTodos = async () => {
+import { Todo } from '@prisma/client';
+
+export const getTodos = async (): Promise<Todo[]> => {
   const response = await fetch(`/api/todos`);
 
   if (!response.ok) {
@@ -8,7 +10,7 @@ export const getTodos = async () => {
   return response.json();
 };
 
-export const postTodo = async (title: string) => {
+export const postTodo = async (title: string): Promise<void> => {
   const response = await fetch(`/api/todos`, {
     method: 'POST',
     headers: {
@@ -24,7 +26,7 @@ export const postTodo = async (title: string) => {
   }
 };
 
-export const patchTodo = async (id: number) => {
+export const patchTodo = async (id: number): Promise<void> => {
   const response = await fetch(`/api/todos/${id}`, {
     method: 'PATCH',
     headers: {
@@ -37,7 +39,7 @@ export const patchTodo = async (id: number) => {
   }
 };
 
-export const deleteTodo = async (id: number) => {
+export const deleteTodo = async (id: number): Promise<void> => {
   const response = await fetch(`/api/todos/${id}`, {
     method: 'DELETE',
     headers: {
