@@ -19,6 +19,8 @@
     "react/prop-types": "off",
     "import/prefer-default-export": "off",
     "no-promise-executor-return": "off",
-    "no-undef-init": "off"
+    "no-undef-init": "off",
+    "@typescript-eslint/no-shadow": "warn",
+    "@typescript-eslint/no-unused-vars": "warn"
   }
 }
