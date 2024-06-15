@@ -7,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <header className="text-center text-xl font-semibold mb-6 leading-5 text-eclipse-950">
+      <header className="mb-6 text-center text-xl font-semibold leading-5 text-eclipse-950">
         TO-DO List Demo App with Tanstack Query
       </header>
       {children}

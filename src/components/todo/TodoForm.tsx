@@ -1,6 +1,7 @@
 'use client';
 
 import { type FormEvent, useRef } from 'react';
+
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
@@ -28,7 +29,7 @@ export default function TodoForm() {
   };
 
   return (
-    <form onSubmit={addTodo} className="w-3/4 flex items-center gap-2">
+    <form onSubmit={addTodo} className="flex w-3/4 items-center gap-2">
       <Input
         ref={todoRef}
         type="text"

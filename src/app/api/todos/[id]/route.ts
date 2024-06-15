@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
+
 import prisma from '../../../../../db';
 
 export async function PATCH(
   req: Request,
-  { params: { id } }: { params: { id: string } }
+  { params: { id } }: { params: { id: string } },
 ) {
   const todo = await prisma.todo.findUnique({
     where: {

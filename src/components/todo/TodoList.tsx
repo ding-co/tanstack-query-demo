@@ -1,9 +1,10 @@
 'use client';
 
 import type { Todo } from '@prisma/client';
-import { Checkbox } from '../ui/checkbox';
-import { Trash2Icon } from 'lucide-react';
 import clsx from 'clsx';
+import { Trash2Icon } from 'lucide-react';
+
+import { Checkbox } from '../ui/checkbox';
 
 interface Props {
   todos: Todo[];
@@ -32,11 +33,11 @@ export default function TodoList({ todos }: Props) {
   };
 
   return (
-    <ul className="w-3/4 flex flex-col gap-3">
+    <ul className="flex w-3/4 flex-col gap-3">
       {todos.map((todo) => (
         <li
           key={todo.id}
-          className="flex items-center gap-2 bg-white bg-opacity-95 leading-5 p-4 border border-solid border-kabul-700 rounded-2xl"
+          className="flex items-center gap-2 rounded-2xl border border-solid border-kabul-700 bg-white bg-opacity-95 p-4 leading-5"
         >
           <Checkbox
             id={todo.id.toString()}
@@ -46,14 +47,14 @@ export default function TodoList({ todos }: Props) {
           <label
             htmlFor={todo.id.toString()}
             className={clsx('text-base font-medium leading-none', {
-              'line-through text-gray-400': todo.isDone,
+              'text-gray-400 line-through': todo.isDone,
               'text-black': !todo.isDone,
             })}
           >
             {todo.title}
           </label>
           <Trash2Icon
-            className="cursor-pointer w-5 h-5"
+            className="h-5 w-5 cursor-pointer"
             onClick={deleteTodo(todo.id)}
           />
         </li>

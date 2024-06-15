@@ -1,9 +1,11 @@
-import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
+import type { ReactNode } from 'react';
+
 import { cn } from '@/lib/utils';
-import Providers from './providers';
+
 import './globals.css';
+import Providers from './providers';
 
 const notoSansKR = Noto_Sans_KR({
   subsets: ['latin'],
@@ -24,12 +26,12 @@ export default function RootLayout({
     <html lang="ko">
       <body
         className={cn(
-          'w-full min-h-screen font-sans antialiased leading-none disable-blur overflow-x-clip bg-sisal-300',
-          notoSansKR.variable
+          'disable-blur min-h-screen w-full overflow-x-clip bg-sisal-300 font-sans leading-none antialiased',
+          notoSansKR.variable,
         )}
         suppressHydrationWarning={true}
       >
-        <div className="container flex flex-col py-8 px-6 my-0 mx-auto">
+        <div className="container mx-auto my-0 flex flex-col px-6 py-8">
           <Providers>{children}</Providers>
         </div>
       </body>
