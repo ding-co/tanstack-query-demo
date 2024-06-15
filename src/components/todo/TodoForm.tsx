@@ -1,12 +1,14 @@
-'use client';
-
 import { postTodo } from '@/api';
 import { type FormEvent, useRef } from 'react';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 
-export default function TodoForm() {
+interface Props {
+  addTodo: (title: string) => void;
+}
+
+export default function TodoForm({ addTodo }: Props) {
   const todoRef = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -16,7 +18,7 @@ export default function TodoForm() {
       return;
     }
 
-    await postTodo(todoRef.current.value.trim());
+    await addTodo(todoRef.current.value.trim());
 
     todoRef.current.value = '';
   };
