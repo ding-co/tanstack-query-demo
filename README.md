@@ -17,6 +17,9 @@
 # 웹에서 DB 보기
 npx prisma studio
 
+# Prisma Client 생성/업데이트
+npx prisma generate
+
 # 데이터베이스 생성
 npx prisma migrate dev --name init
 
