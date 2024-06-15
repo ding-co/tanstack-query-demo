@@ -1,5 +1,6 @@
 'use client';
 
+import { deleteTodo, patchTodo } from '@/api';
 import type { Todo } from '@prisma/client';
 import clsx from 'clsx';
 import { Trash2Icon } from 'lucide-react';
@@ -12,24 +13,11 @@ interface Props {
 
 export default function TodoList({ todos }: Props) {
   const handleToggle = (id: number) => async () => {
-    await fetch(`/api/todos/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    await patchTodo(id);
   };
 
-  const deleteTodo = (id: number) => async () => {
-    await fetch(`/api/todos/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id,
-      }),
-    });
+  const onDeleteTodo = (id: number) => async () => {
+    await deleteTodo(id);
   };
 
   return (
@@ -56,7 +44,7 @@ export default function TodoList({ todos }: Props) {
           <div>
             <Trash2Icon
               className="h-5 w-5 cursor-pointer"
-              onClick={deleteTodo(todo.id)}
+              onClick={onDeleteTodo(todo.id)}
             />
           </div>
         </li>
