@@ -10,7 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "pretty": "prettier --write \"./**/*.{js,jsx,ts,tsx,json}\"",
+    "pretty": "prettier --cache --write \"./**/*.{js,jsx,ts,tsx,json}\"",
     "lint": "next lint",
     "prepare": "husky install"
   },
