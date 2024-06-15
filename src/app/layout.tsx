@@ -31,7 +31,7 @@ export default function RootLayout({
         )}
         suppressHydrationWarning={true}
       >
-        <div className="container mx-auto my-0 flex flex-col px-6 py-8">
+        <div className="container mx-auto my-0 flex min-h-screen flex-col px-6 py-8">
           <Providers>{children}</Providers>
         </div>
       </body>
