@@ -1,4 +1,9 @@
+import { sleep } from '@/lib/\btime';
+
 export const getTodos = async () => {
+  // FIXME: This is a hack to simulate a slow network.
+  await sleep(1_000);
+
   const response = await fetch(`/api/todos`);
 
   if (!response.ok) {

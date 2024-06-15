@@ -17,10 +17,7 @@ export default function TodosPage() {
     const todos = await getTodos();
     setTodos(todos);
 
-    // Simulate for loading state
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1_000);
+    setIsLoading(false);
   };
 
   const addTodo = async (title: string) => {
