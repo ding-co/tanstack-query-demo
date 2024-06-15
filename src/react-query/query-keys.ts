@@ -1,1 +1,3 @@
-export const queryKeys = {} as const;
+export const queryKeys = {
+  todos: 'todos',
+} as const;
