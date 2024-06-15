@@ -1,24 +1,30 @@
-'use client';
-
-import { deleteTodo, patchTodo } from '@/api';
 import type { Todo } from '@prisma/client';
 import clsx from 'clsx';
 import { Trash2Icon } from 'lucide-react';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 import { Checkbox } from '../ui/checkbox';
 
 interface Props {
   todos: Todo[];
+  handleToggleTodo: (id: number) => () => Promise<void>;
+  onDeleteTodo: (id: number) => () => Promise<void>;
+  isLoading: boolean;
 }
 
-export default function TodoList({ todos }: Props) {
-  const handleToggle = (id: number) => async () => {
-    await patchTodo(id);
-  };
-
-  const onDeleteTodo = (id: number) => async () => {
-    await deleteTodo(id);
-  };
+export default function TodoList({
+  todos,
+  handleToggleTodo,
+  onDeleteTodo,
+  isLoading,
+}: Props) {
+  if (isLoading) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <ClipLoader loading={isLoading} color="#1b62da" size="50px" />
+      </div>
+    );
+  }
 
   return (
     <ul className="flex w-3/4 flex-col gap-3">
@@ -30,7 +36,7 @@ export default function TodoList({ todos }: Props) {
           <Checkbox
             id={todo.id.toString()}
             checked={todo.isDone}
-            onCheckedChange={handleToggle(todo.id)}
+            onCheckedChange={handleToggleTodo(todo.id)}
           />
           <label
             htmlFor={todo.id.toString()}
