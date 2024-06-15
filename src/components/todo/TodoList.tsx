@@ -1,29 +1,53 @@
+'use client';
+
 import type { Todo } from '@prisma/client';
 import clsx from 'clsx';
 import { Trash2Icon } from 'lucide-react';
 import ClipLoader from 'react-spinners/ClipLoader';
 
+import {
+  useDeleteTodoMutation,
+  usePatchTodoMutation,
+} from '@/hooks/mutations/useTodosMutation';
+import { useTodosQuery } from '@/hooks/queries/useTodosQuery';
+
 import { Checkbox } from '../ui/checkbox';
 
 interface Props {
-  todos: Todo[];
-  handleToggleTodo: (id: number) => () => Promise<void>;
-  onDeleteTodo: (id: number) => () => Promise<void>;
-  isLoading: boolean;
+  initialTodos: Todo[];
 }
 
-export default function TodoList({
-  todos,
-  handleToggleTodo,
-  onDeleteTodo,
-  isLoading,
-}: Props) {
-  if (isLoading) {
+export default function TodoList({ initialTodos }: Props) {
+  const {
+    data: todos,
+    isPending,
+    isError,
+    error,
+  } = useTodosQuery({
+    initialData: initialTodos,
+  });
+
+  const { mutate: patchMutate } = usePatchTodoMutation();
+  const { mutate: deleteMutate } = useDeleteTodoMutation();
+
+  const handleToggleTodo = (id: number) => () => {
+    patchMutate(id);
+  };
+
+  const onDeleteTodo = (id: number) => () => {
+    deleteMutate(id);
+  };
+
+  if (isPending) {
     return (
       <div className="flex flex-1 items-center justify-center">
-        <ClipLoader loading={isLoading} color="#1b62da" size="50px" />
+        <ClipLoader loading={isPending} color="#1b62da" size="50px" />
       </div>
     );
+  }
+
+  if (isError) {
+    return <div className="text-red-500">{error.toString()}</div>;
   }
 
   return (
