@@ -27,7 +27,8 @@ export default function TodoList({ initialTodos }: Props) {
     initialData: initialTodos,
   });
 
-  const { mutate: patchMutate } = usePatchTodoMutation();
+  const { mutate: patchMutate, isPending: isPatchPending } =
+    usePatchTodoMutation();
   const { mutate: deleteMutate } = useDeleteTodoMutation();
 
   const handleToggleTodo = (id: number) => () => {
@@ -59,7 +60,7 @@ export default function TodoList({ initialTodos }: Props) {
         >
           <Checkbox
             id={todo.id.toString()}
-            checked={todo.isDone}
+            checked={isPatchPending ? !todo.isDone : todo.isDone}
             onCheckedChange={handleToggleTodo(todo.id)}
           />
           <label
