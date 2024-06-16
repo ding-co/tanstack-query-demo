@@ -43,3 +43,21 @@ npx prisma migrate dev --name init
 # 데이터베이스 초기화
 npx prisma migrate reset
 ```
+
+### 브랜치
+
+- main 브랜치 (tanstack-query/optimistic-update-v2와 동일)
+  - Tanstack Query 이용, 낙관적 업데이트 반영한 최종 버전
+- without-tanstack-query 브랜치
+  - Tanstack Query 이용하지 않고 코드 구현
+- with-tanstack-query 브랜치
+  - 낙관적 업데이트 작업 전 Tanstack Query 이용한 코드 구현
+- tanstack-query/optimistic-update-v1 브랜치
+  - UI 중심 낙관적 업데이트
+  - 낙관적 업데이트 v1로 한계점 존재
+- tanstack-query/optimistic-update-v2 브랜치
+  - 캐시 중심 낙관적 업데이트
+  - 낙관적 업데이트 v2 최종 버전
+- demo-boilerplate 브랜치
+  - 코드 작업 전 기본적인 프로젝트 scaffolding 한 상태
+  - 직접 코드 작성해보면서 연습할 수 있음
