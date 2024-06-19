@@ -15,7 +15,7 @@ export const usePostTodoMutation = (
   return useMutation({
     mutationFn: postTodo,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      return queryClient.invalidateQueries({
         queryKey: [queryKeys.todos],
       });
     },
@@ -31,7 +31,7 @@ export const usePatchTodoMutation = (
   return useMutation({
     mutationFn: patchTodo,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      return queryClient.invalidateQueries({
         queryKey: [queryKeys.todos],
       });
     },
@@ -47,7 +47,7 @@ export const useDeleteTodoMutation = (
   return useMutation({
     mutationFn: deleteTodo,
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      return queryClient.invalidateQueries({
         queryKey: [queryKeys.todos],
       });
     },
