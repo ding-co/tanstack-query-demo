@@ -17,16 +17,7 @@ interface Props {
   initialTodos: Todo[];
 }
 
-export default function TodoList({ initialTodos }: Props) {
-  const {
-    data: todos,
-    isPending,
-    isError,
-    error,
-  } = useTodosQuery({
-    initialData: initialTodos,
-  });
-
+function TodoItem({ id, title, isDone }: Todo) {
   const { mutate: patchMutate, isPending: isPatchPending } =
     usePatchTodoMutation();
   const { mutate: deleteMutate } = useDeleteTodoMutation();
@@ -38,6 +29,42 @@ export default function TodoList({ initialTodos }: Props) {
   const onDeleteTodo = (id: number) => () => {
     deleteMutate(id);
   };
+
+  return (
+    <li className="flex items-center gap-2 rounded-2xl border border-solid border-kabul-700 bg-white bg-opacity-95 p-4 leading-5">
+      <Checkbox
+        id={id.toString()}
+        checked={isPatchPending ? !isDone : isDone}
+        onCheckedChange={handleToggleTodo(id)}
+      />
+      <label
+        htmlFor={id.toString()}
+        className={clsx('text-base font-medium leading-none', {
+          // 'text-gray-400 line-through': isDone,
+          // 'text-black': !isDone,
+        })}
+      >
+        {title}
+      </label>
+      <div>
+        <Trash2Icon
+          className="h-5 w-5 cursor-pointer"
+          onClick={onDeleteTodo(id)}
+        />
+      </div>
+    </li>
+  );
+}
+
+export default function TodoList({ initialTodos }: Props) {
+  const {
+    data: todos,
+    isPending,
+    isError,
+    error,
+  } = useTodosQuery({
+    initialData: initialTodos,
+  });
 
   if (isPending) {
     return (
@@ -54,31 +81,7 @@ export default function TodoList({ initialTodos }: Props) {
   return (
     <ul className="flex w-3/4 flex-col gap-3">
       {todos.map((todo) => (
-        <li
-          key={todo.id}
-          className="flex items-center gap-2 rounded-2xl border border-solid border-kabul-700 bg-white bg-opacity-95 p-4 leading-5"
-        >
-          <Checkbox
-            id={todo.id.toString()}
-            checked={isPatchPending ? !todo.isDone : todo.isDone}
-            onCheckedChange={handleToggleTodo(todo.id)}
-          />
-          <label
-            htmlFor={todo.id.toString()}
-            className={clsx('text-base font-medium leading-none', {
-              'text-gray-400 line-through': todo.isDone,
-              'text-black': !todo.isDone,
-            })}
-          >
-            {todo.title}
-          </label>
-          <div>
-            <Trash2Icon
-              className="h-5 w-5 cursor-pointer"
-              onClick={onDeleteTodo(todo.id)}
-            />
-          </div>
-        </li>
+        <TodoItem key={todo.id} {...todo} />
       ))}
     </ul>
   );
