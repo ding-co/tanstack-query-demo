@@ -1,16 +1,10 @@
 import { deleteTodo, patchTodo, postTodo } from '@/api';
 import { Todo } from '@prisma/client';
-import {
-  UseMutationOptions,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { queryKeys } from '@/react-query/query-keys';
 
-export const usePostTodoMutation = (
-  mutationOptions?: UseMutationOptions<void, Error, string>,
-) => {
+export const usePostTodoMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -20,13 +14,10 @@ export const usePostTodoMutation = (
         queryKey: [queryKeys.todos],
       });
     },
-    ...mutationOptions,
   });
 };
 
-export const usePatchTodoMutation = (
-  mutationOptions?: UseMutationOptions<void, Error, number>,
-) => {
+export const usePatchTodoMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -50,20 +41,17 @@ export const usePatchTodoMutation = (
       };
     },
     onError: (error, variables, rollback) => {
-      (rollback as Function)?.();
+      rollback?.();
     },
     onSettled: () => {
       return queryClient.invalidateQueries({
         queryKey: [queryKeys.todos],
       });
     },
-    ...mutationOptions,
   });
 };
 
-export const useDeleteTodoMutation = (
-  mutationOptions?: UseMutationOptions<void, Error, number>,
-) => {
+export const useDeleteTodoMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -73,6 +61,5 @@ export const useDeleteTodoMutation = (
         queryKey: [queryKeys.todos],
       });
     },
-    ...mutationOptions,
   });
 };

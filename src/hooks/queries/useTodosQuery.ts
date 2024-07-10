@@ -1,13 +1,17 @@
 import { getTodos } from '@/api';
 import { Todo } from '@prisma/client';
-import { QueryOptions, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { queryKeys } from '@/react-query/query-keys';
 
-export const useTodosQuery = (queryOptions?: QueryOptions<Todo[]>) => {
+export const useTodosQuery = ({
+  initialData = [],
+}: {
+  initialData?: Todo[];
+}) => {
   return useQuery({
     queryKey: [queryKeys.todos],
     queryFn: getTodos,
-    ...queryOptions,
+    initialData,
   });
 };
