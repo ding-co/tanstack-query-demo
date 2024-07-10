@@ -41,7 +41,7 @@ export const usePatchTodoMutation = () => {
       };
     },
     onError: (error, variables, rollback) => {
-      (rollback as Function)?.();
+      rollback?.();
     },
     onSettled: () => {
       return queryClient.invalidateQueries({
